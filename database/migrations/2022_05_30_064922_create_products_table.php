@@ -21,9 +21,9 @@ return new class extends Migration
             $table->bigInteger('product_brands_id')->unsigned();
             $table->bigInteger('product_categories_id')->unsigned();
             $table->integer('product_sub_categories_id')->nullable();
-            $table->integer('weight')->nullable();
-            $table->boolean('is_sale')->default(1);
-            $table->boolean('is_managed_stock')->default(0);
+            $table->decimal('weight', 8, 2)->nullable();
+            $table->boolean('is_sale')->default(true);
+            $table->boolean('is_managed_stock')->default(false);
             $table->integer('alert_quantity')->nullable();
             $table->text('description')->nullable();
             $table->text('image_path')->nullable();
