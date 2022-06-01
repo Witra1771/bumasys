@@ -13,12 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_selling_price_groups', function (Blueprint $table) {
+        Schema::create('product_warranties', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('companies_id')->unsigned();
             $table->string('name');
-            $table->string('description');
-            $table->boolean('is_active')->default(true);
+            $table->text('description')->nullable();
+            $table->integer('duration')->nullable();
+            $table->enum('duration_type', ['Days', 'Months', 'Years'])->nullable();
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
+            $table->string('deleted_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('companies_id')->references('id')->on('companies');
@@ -32,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('selling_price_groups');
+        Schema::dropIfExists('warranties');
     }
 };

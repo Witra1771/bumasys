@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('product_units', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('companies_id')->unsigned();
             $table->string('name');
             $table->string('short_name')->nullable();
             $table->boolean('decimal')->default(0);
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->string('deleted_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('companies_id')->references('id')->on('companies');
         });
     }
 

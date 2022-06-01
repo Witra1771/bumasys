@@ -15,10 +15,13 @@ return new class extends Migration
     {
         Schema::create('product_details', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('companies_id')->unsigned();
             $table->bigInteger('products_id')->unsigned();
             $table->string('name');
             $table->string('sku')->nullable();
-            $table->json('price');
+            $table->integer('stock');
+            $table->decimal('price');
+            $table->json('group_price')->nullable(); // if the selling price group is more than 0
             $table->text('image_path')->nullable();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
@@ -26,6 +29,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('products_id')->references('id')->on('products');
+            $table->foreign('companies_id')->references('id')->on('companies');
         });
     }
 

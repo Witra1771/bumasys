@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('companies_id')->unsigned();
             $table->boolean('is_can_login')->default(false);
             $table->boolean('is_active')->default(true);
-            $table->bigInteger('users_id')->unsigned();
             $table->enum('contact_type', ['Suppliers', 'Customers', 'Advertisers']);
             $table->boolean('is_individual')->default(true);
             $table->string('contact_id');
@@ -38,6 +38,7 @@ return new class extends Migration
             $table->foreign('address_districts_id')->references('id')->on('address_districts');
             $table->foreign('address_subdistricts_id')->references('id')->on('address_subdistricts');
             $table->foreign('groups_id')->references('id')->on('groups');
+            $table->foreign('companies_id')->references('id')->on('companies');
         });
     }
 

@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('variations', function (Blueprint $table) {
+        Schema::create('product_variations', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('companies_id')->unsigned();
             $table->string('name');
             $table->json('value');
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('companies_id')->references('id')->on('companies');
         });
     }
 

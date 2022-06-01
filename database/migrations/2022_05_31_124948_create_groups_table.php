@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('contact_groups', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('companies_id')->unsigned();
             $table->enum('group_type', ['Suppliers', 'Customers', 'Advertisers']);
             $table->string('name');
             $table->text('description')->nullable();
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('selling_price_groups_id')->references('id')->on('selling_price_groups');
+            $table->foreign('companies_id')->references('id')->on('companies');
         });
     }
 

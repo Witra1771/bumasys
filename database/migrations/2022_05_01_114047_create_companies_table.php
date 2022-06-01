@@ -13,15 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_selling_price_groups', function (Blueprint $table) {
+        // Belum Fix
+        Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('companies_id')->unsigned();
+            $table->bigInteger('users_id')->unsigned();
             $table->string('name');
-            $table->string('description');
-            $table->boolean('is_active')->default(true);
+            $table->string('vat_number')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->text('address');
+            $table->text('company_infromation');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('companies_id')->references('id')->on('companies');
+            $table->foreign('users_id')->references('id')->on('users');
         });
     }
 
@@ -32,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('selling_price_groups');
+        Schema::dropIfExists('companies');
     }
 };

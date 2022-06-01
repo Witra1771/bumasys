@@ -13,17 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('warranties', function (Blueprint $table) {
+        Schema::create('currencies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description')->nullable();
-            $table->integer('duration')->nullable();
-            $table->enum('duration_type', ['Days', 'Months', 'Years'])->nullable();
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->string('deleted_by')->nullable();
+            $table->string('symbol');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -34,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('warranties');
+        Schema::dropIfExists('currency');
     }
 };

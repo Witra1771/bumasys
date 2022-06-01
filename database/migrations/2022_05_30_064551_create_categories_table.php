@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('product_categories', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('companies_id')->unsigned();
             $table->string('name');
             $table->string('category_code')->nullable();
             $table->text('description')->nullable();
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->string('deleted_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('companies_id')->references('id')->on('companies');
         });
     }
 
