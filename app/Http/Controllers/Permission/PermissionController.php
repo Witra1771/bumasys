@@ -1,25 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Product;
+namespace App\Http\Controllers\Permission;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product\Product;
-use App\Http\Requests\Product\StoreProductRequest;
-use App\Http\Requests\Product\UpdateProductRequest;
-use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() : Response
+    public function index()
     {
-        return response([
-            'data' => Product::all()
-        ]);
+        //
     }
 
     /**
@@ -35,32 +30,32 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreProductRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductRequest $request)
+    public function store(Request $request)
     {
-
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product\Product  $Product
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $Product)
+    public function show($id)
     {
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Product\Product  $Product
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
         //
     }
@@ -68,23 +63,23 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateProductRequest  $request
-     * @param  \App\Models\Product\Product  $Product
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequest $request, Product $Product)
+    public function update(Request $request, $id)
     {
-
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product\Product  $Product
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $Product)
+    public function destroy($id)
     {
-
+        //
     }
 }

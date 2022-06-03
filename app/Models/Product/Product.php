@@ -4,6 +4,7 @@ namespace App\Models\Product;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\Product\ProductScopeService;
 
@@ -67,4 +68,29 @@ class Product extends Model
         'updated_by' => 'string',
         'deleted_by' => 'string'
     ];
+
+    public function unit(): HasOne
+    {
+        return $this->hasOne(Unit::class, 'product_units_id', 'id');
+    }
+
+    public function brand(): HasOne
+    {
+        return $this->hasOne(Brand::class, 'product_brands_id', 'id');
+    }
+
+    public function category(): HasOne
+    {
+        return $this->hasOne(Category::class, 'product_categories_id', 'id');
+    }
+
+    public function subCategory(): HasOne
+    {
+        return $this->hasOne(Category::class, 'product_sub_categories_id', 'id');
+    }
+
+    public function warranty(): HasOne
+    {
+        return $this->hasOne(Warranty::class, 'product_warranties_id', 'id');
+    }
 }
