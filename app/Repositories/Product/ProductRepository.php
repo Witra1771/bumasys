@@ -23,6 +23,7 @@ class ProductRepository implements ProductRepositoryInterface
     {
         Product::destroy($id);
     }
+
     public function createProduct(array $request)
     {
         return Product::create($request);
@@ -33,13 +34,7 @@ class ProductRepository implements ProductRepositoryInterface
         return Product::whereId($id)->update($request);
     }
 
-    public function getAllProductonSale()
-    {
-        return Product::where('is_sale', true);
-    }
-
-    public function getAllProductonNotSale()
-    {
-        return Product::where('is_sale', false);
+    public function isPackageProduct($id){
+        return Product::where('is_package', true)->pluck('list_product_id');
     }
 }

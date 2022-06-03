@@ -16,7 +16,7 @@ return new class extends Migration
         // Belum Fix
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('users_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->string('name');
             $table->string('vat_number')->nullable();
             $table->string('phone_number')->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('company_infromation');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

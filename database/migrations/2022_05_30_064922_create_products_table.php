@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('companies_id')->unsigned();
+            $table->bigInteger('company_id')->unsigned();
             $table->string('name');
             $table->string('sku')->nullable();
-            $table->bigInteger('product_units_id')->unsigned();
-            $table->bigInteger('product_brands_id')->unsigned();
-            $table->bigInteger('product_categories_id')->unsigned();
-            $table->bigInteger('product_sub_categories_id')->nullable();
-            $table->bigInteger('warranties_id')->nullable();
+            $table->bigInteger('product_unit_id')->unsigned();
+            $table->bigInteger('product_brand_id')->unsigned();
+            $table->bigInteger('product_category_id')->unsigned();
+            $table->bigInteger('product_sub_category_id')->unsigned();
+            $table->bigInteger('product_warranty_id')->unsigned();
             $table->decimal('weight', 8, 2)->nullable();
             $table->boolean('is_sale')->default(true);
             $table->boolean('is_managed_stock')->default(false);
@@ -31,18 +31,17 @@ return new class extends Migration
             $table->text('image_path')->nullable();
             $table->text('brochure_path')->nullable();
             $table->enum('product_type', ['single', 'variable', 'package'])->default('single');
-            $table->json('variants')->nullable(); // ['variant_id' => '1,2', 'variant_name_generate' => 'variant value 1 + 2' ]
-            $table->json('list_product_id')->nullable(); // if product_type == combo
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->string('deleted_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('product_brands_id')->references('id')->on('product_brands');
-            $table->foreign('product_categories_id')->references('id')->on('product_categories');
-            $table->foreign('product_units_id')->references('id')->on('product_units');
-            $table->foreign('warranties_id')->references('id')->on('warranties');
-            $table->foreign('companies_id')->references('id')->on('companies');
+            $table->foreign('product_brand_id')->references('id')->on('product_brands');
+            $table->foreign('product_category_id')->references('id')->on('product_categories');
+            $table->foreign('product_sub_category_id')->references('id')->on('product_categories');
+            $table->foreign('product_unit_id')->references('id')->on('product_units');
+            $table->foreign('product_warranty_id')->references('id')->on('product_warranties');
+            $table->foreign('company_id')->references('id')->on('companies');
         });
     }
 

@@ -6,30 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Models\Product\Product;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
-use App\Interfaces\Product\ProductRepositoryInterface;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class ProductController extends Controller
 {
-    private ProductRepositoryInterface $productRepository;
-
-    public function __construct(ProductRepositoryInterface $productRepository)
-    {
-        $this->productRepository = $productRepository;
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(): JsonResponse
+    public function index()
     {
-         return response()->json([
-            'data' => $this->productRepository->getAllProduct()
-        ]);
+
     }
 
     /**
@@ -48,20 +35,9 @@ class ProductController extends Controller
      * @param  \App\Http\Requests\StoreProductRequest  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(StoreProductRequest $request)
-    public function store(Request $request): JsonResponse
+    public function store(StoreProductRequest $request)
     {
-        $productRepository = $request->only([
-            'client',
-            'details'
-        ]);
 
-        return response()->json(
-            [
-                'data' => $this->productRepository->createProduct($productRepository)
-            ],
-            Response::HTTP_CREATED
-        );
     }
 
     /**
@@ -70,14 +46,9 @@ class ProductController extends Controller
      * @param  \App\Models\Product\Product  $Product
      * @return \Illuminate\Http\Response
      */
-    // public function show(Product $Product): JsonResponse
-    public function show(Request $request): JsonResponse
+    public function show(Product $Product)
     {
-        $productId = $request->route('id');
 
-        return response()->json([
-            'data' => $this->productRepository->getProductById($productId)
-        ]);
     }
 
     /**
@@ -98,18 +69,9 @@ class ProductController extends Controller
      * @param  \App\Models\Product\Product  $Product
      * @return \Illuminate\Http\Response
      */
-    // public function update(UpdateProductRequest $request, Product $Product)
-    public function update(Request $request): JsonResponse
+    public function update(UpdateProductRequest $request, Product $Product)
     {
-        $productId = $request->route('id');
-        $productDetails = $request->only([
-            'client',
-            'details'
-        ]);
 
-        return response()->json([
-            'data' => $this->productRepository->updateProduct($productId, $productDetails)
-        ]);
     }
 
     /**
@@ -118,12 +80,8 @@ class ProductController extends Controller
      * @param  \App\Models\Product\Product  $Product
      * @return \Illuminate\Http\Response
      */
-    // public function destroy(Product $Product)
-    public function destroy(Request $request): JsonResponse
+    public function destroy(Product $Product)
     {
-        $productId = $request->route('id');
-        $this->orderRepository->deleteOrder($productId);
 
-        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

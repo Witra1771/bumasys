@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('companies_id')->unsigned();
+            $table->bigInteger('group_id')->unsigned();
+            $table->bigInteger('company_id')->unsigned();
             $table->boolean('is_can_login')->default(false);
             $table->boolean('is_active')->default(true);
             $table->enum('contact_type', ['Suppliers', 'Customers', 'Advertisers']);
@@ -24,21 +25,15 @@ return new class extends Migration
             $table->string('name');
             $table->string('mobile');
             $table->string('email')->nullable();
-            $table->bigInteger('groups_id')->unsigned();
-            $table->bigInteger('address_provinces_id')->unsigned();
-            $table->bigInteger('address_cities_id')->unsigned();
-            $table->bigInteger('address_districts_id')->unsigned();
-            $table->bigInteger('address_subdistricts_id')->unsigned();
+            $table->string('address_provincy_id');
+            $table->string('address_city_id');
+            $table->string('address_district_id');
+            $table->string('address_subdistrict_id');
             $table->text('address')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('users_id')->references('id')->on('users');
-            $table->foreign('address_provinces_id')->references('id')->on('address_provinces');
-            $table->foreign('address_cities_id')->references('id')->on('address_cities');
-            $table->foreign('address_districts_id')->references('id')->on('address_districts');
-            $table->foreign('address_subdistricts_id')->references('id')->on('address_subdistricts');
-            $table->foreign('groups_id')->references('id')->on('groups');
-            $table->foreign('companies_id')->references('id')->on('companies');
+            $table->foreign('group_id')->references('id')->on('contact_groups');
+            $table->foreign('company_id')->references('id')->on('companies');
         });
     }
 

@@ -9,6 +9,5 @@ interface ProductRepositoryInterface
     public function deleteProduct($productId);
     public function createProduct(array $request);
     public function updateProduct($productId, array $request);
-    public function getAllProductonSale();
-    public function getAllProductonNotSale();
+    public function isPackageProduct($productId);
 }
