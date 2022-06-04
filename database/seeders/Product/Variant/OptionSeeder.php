@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Product\Variant;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CompanySeeder extends Seeder
+class OptionSeeder extends Seeder
 {
     /**
      * Run the database seeds.

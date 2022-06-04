@@ -1,16 +1,16 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Contact;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class WarrantySeeder extends Seeder
+class GroupSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      *
-     * @return void
+     * @return Group
      */
     public function run()
     {

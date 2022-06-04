@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Product;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class SettingSeeder extends Seeder
+class WarrantySeeder extends Seeder
 {
     /**
      * Run the database seeds.

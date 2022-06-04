@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Policies\Product;
+namespace App\Policies\Company;
 
-use App\Models\Company\Setting;
+use App\Models\Company\Company;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class SettingPolicy
+class CompanyPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class SettingPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Company\Setting  $setting
+     * @param  \App\Models\Company\Company  $company
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Setting $setting)
+    public function view(User $user, Company $company)
     {
         //
     }
@@ -48,10 +48,10 @@ class SettingPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Company\Setting  $setting
+     * @param  \App\Models\Company\Company  $company
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Setting $setting)
+    public function update(User $user, Company $company)
     {
         //
     }
@@ -60,10 +60,10 @@ class SettingPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Company\Setting  $setting
+     * @param  \App\Models\Company\Company  $company
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Setting $setting)
+    public function delete(User $user, Company $company)
     {
         //
     }
@@ -72,10 +72,10 @@ class SettingPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Company\Setting  $setting
+     * @param  \App\Models\Company\Company  $company
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Setting $setting)
+    public function restore(User $user, Company $company)
     {
         //
     }
@@ -84,10 +84,10 @@ class SettingPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Company\Setting  $setting
+     * @param  \App\Models\Company\Company  $company
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Setting $setting)
+    public function forceDelete(User $user, Company $company)
     {
         //
     }

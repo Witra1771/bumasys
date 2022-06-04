@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\Product\ProductScopeService;
 use Cviebrock\EloquentSluggable\Sluggable;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Product extends Model
+class Product extends Model implements Auditable
 {
-    use HasFactory, SoftDeletes, ProductScopeService, Sluggable;
+    use HasFactory, SoftDeletes, ProductScopeService, Sluggable, \OwenIt\Auditing\Auditable;
 
     public $table = 'products';
 

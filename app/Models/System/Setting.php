@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Models\Product\Variant;
+namespace App\Models\System;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\Auditable;
 
-class Option extends Model
+class Setting extends Model
 {
     use HasFactory;
 }

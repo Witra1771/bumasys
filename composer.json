@@ -26,7 +26,6 @@
         "laravel/ui": "^3.4",
         "laravelcollective/html": "^6.2",
         "maatwebsite/excel": "^3.1",
-        "midtrans/midtrans-php": "^2.5",
         "milon/barcode": "^9.0",
         "owen-it/laravel-auditing": "^13.0",
         "propaganistas/laravel-phone": "^4.3",
