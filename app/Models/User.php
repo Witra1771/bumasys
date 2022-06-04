@@ -9,10 +9,12 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Cviebrock\EloquentSluggable\Sluggable;
+use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, Auditable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, Sluggable;
+    use SoftDeletes, HasApiTokens, HasFactory, Notifiable, HasRoles, Sluggable, \OwenIt\Auditing\Auditable;
 
     /**
      * Return the sluggable configuration array for this model.

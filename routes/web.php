@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Permission\RoleController;
 use App\Http\Controllers\Product\ProductController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,15 +16,7 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
-Route::group(['middleware' => ['auth']], function() {
-    /**
-    * Verification Routes
-    */
-    Route::get('/email/verify', 'VerificationController@show')->name('verification.notice');
-    Route::get('/email/verify/{id}/{hash}', 'VerificationController@verify')->name('verification.verify')->middleware(['signed']);
-    Route::post('/email/resend', 'VerificationController@resend')->name('verification.resend');
-});
+Auth::routes(['verify' => true]);
 
 Route::get('/', function () {
     return view('welcome');
