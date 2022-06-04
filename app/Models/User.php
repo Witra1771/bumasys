@@ -11,10 +11,11 @@ use Spatie\Permission\Traits\HasRoles;
 use Cviebrock\EloquentSluggable\Sluggable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Rappasoft\LaravelAuthenticationLog\Traits\AuthenticationLoggable;
 
 class User extends Authenticatable implements MustVerifyEmail, Auditable
 {
-    use SoftDeletes, HasApiTokens, HasFactory, Notifiable, HasRoles, Sluggable, \OwenIt\Auditing\Auditable;
+    use SoftDeletes, HasApiTokens, HasFactory, Notifiable, HasRoles, Sluggable, \OwenIt\Auditing\Auditable, AuthenticationLoggable;
 
     /**
      * Return the sluggable configuration array for this model.
