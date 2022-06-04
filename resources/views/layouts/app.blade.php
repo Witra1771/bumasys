@@ -27,8 +27,10 @@
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 @foreach (language()->allowed() as $code => $name)
-                    <a href="{{ language()->back($code) }}">{{ $name }}</a>
+                    <a href="{{ language()->back($code) }}">{{ $name }}</a> &nbsp;@include('vendor.language.flag')&nbsp;
+
                 @endforeach
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

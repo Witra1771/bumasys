@@ -24,7 +24,7 @@
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
         "laravel/socialite": "^5.5",
-        "laravel/telescope": "^4.7",
+        "laravel/telescope": "^4.9",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
         "laravelcollective/html": "^6.2",
@@ -85,7 +85,6 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-                "laravel/telescope"
             ]
         }
     },
