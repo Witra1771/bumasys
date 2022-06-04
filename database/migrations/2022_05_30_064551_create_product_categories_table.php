@@ -16,13 +16,15 @@ return new class extends Migration
         Schema::create('product_categories', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('company_id')->unsigned();
+            $table->string('meta_title')->nullable;
+            $table->string('meta_description')->nullable();
+            $table->string('meta_image')->nullable();
+            $table->string('slug');
             $table->string('name');
+            $table->text('image_path')->nullable();
             $table->string('category_code')->nullable();
             $table->text('description')->nullable();
             $table->integer('parent')->default(0);
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->string('deleted_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('company_id')->references('id')->on('companies');

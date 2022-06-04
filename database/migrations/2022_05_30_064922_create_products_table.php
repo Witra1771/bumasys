@@ -16,6 +16,10 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('company_id')->unsigned();
+            $table->string('meta_title')->nullable;
+            $table->string('meta_description')->nullable();
+            $table->string('meta_image')->nullable();
+            $table->string('slug');
             $table->string('name');
             $table->string('sku')->nullable();
             $table->bigInteger('product_unit_id')->unsigned();
@@ -27,13 +31,11 @@ return new class extends Migration
             $table->boolean('is_sale')->default(true);
             $table->boolean('is_managed_stock')->default(false);
             $table->integer('alert_quantity')->nullable();
+            $table->string('short_description')->nullable();
             $table->text('description')->nullable();
             $table->text('image_path')->nullable();
             $table->text('brochure_path')->nullable();
             $table->enum('product_type', ['single', 'variable', 'package'])->default('single');
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->string('deleted_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('product_brand_id')->references('id')->on('product_brands');

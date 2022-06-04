@@ -19,9 +19,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('short_name')->nullable();
             $table->boolean('decimal')->default(0);
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->string('deleted_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('company_id')->references('id')->on('companies');

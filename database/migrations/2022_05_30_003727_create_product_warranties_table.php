@@ -20,9 +20,6 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('duration')->nullable();
             $table->enum('duration_type', ['Days', 'Months', 'Years'])->nullable();
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->string('deleted_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('company_id')->references('id')->on('companies');

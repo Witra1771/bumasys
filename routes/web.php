@@ -33,10 +33,10 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
      \UniSharp\LaravelFilemanager\Lfm::routes();
  });
 
-
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::resource('products', ProductController::class);
 Route::resource('roles',  App\Http\Controllers\Auth\RoleController::class);
 Route::resource('permissions',  App\Http\Controllers\Auth\PermissionController::class);
+
+Route::get('lang/home', [App\Http\Controllers\Common\LangController::class, 'index']);
+Route::get('lang/change', [App\Http\Controllers\Common\LangController::class, 'change'])->name('changeLang');

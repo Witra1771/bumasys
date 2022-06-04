@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('company_id')->unsigned();
             $table->enum('currencies_symbol_placement', ['Before amount', 'After amount'])->default('Before amount');
-            $table->text('logo_path')->nullable();
             $table->enum('date_format', ['mm/dd/yy', 'dd/mm/yy', 'mm-dd-yy', 'dd-mm-yy'])->default('mm/dd/yy');
             $table->enum('time_format', ['24 Hour', '12 Hour'])->default('24 Hour');
             $table->string('time_zone')->default('Asia/Jakarta');

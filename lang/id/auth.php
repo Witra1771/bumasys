@@ -14,15 +14,15 @@ return [
     */
 
     // Auth form
-    'email_address' => 'Email Address',
-    'password_form' => 'Password',
-    'remember_me' => 'Remember Me',
-    'login_button' => 'Login',
-    'is_forgot_password' => 'Forgot Your Password ?',
+    'email_address' => 'Alamat email',
+    'password_form' => 'Kata sandi',
+    'remember_me' => 'Ingat saya',
+    'login_button' => 'Masuk',
+    'is_forgot_password' => 'Lupa kata sandi ?',
     // End auth form
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => 'Kredensial ini tidak cocok dengan catatan kami.',
+    'password' => 'Kata sandi yang diberikan salah.',
+    'throttle' => 'Terlalu banyak upaya login. Silakan coba lagi dalam :seconds detik.',
 
 ];

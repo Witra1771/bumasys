@@ -16,16 +16,16 @@ return new class extends Migration
         Schema::create('product_details', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('product_id')->unsigned();
-            $table->string('original_name');
-            $table->string('variant_name')->nullable();
+            $table->string('meta_title')->nullable;
+            $table->string('meta_description')->nullable();
+            $table->string('meta_image')->nullable();
+            $table->string('slug');
+            $table->string('name')->nullable();
             $table->string('sku')->nullable();
             $table->integer('stock');
             $table->decimal('price');
             $table->json('group_price')->nullable(); // if the selling price group is more than 0
             $table->text('image_path')->nullable();
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->string('deleted_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('product_id')->references('id')->on('products');
