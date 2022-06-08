@@ -41,17 +41,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth')->group(function (){
-    Route::middleware(['verified'])->group(function () {
-        Route::get('/home', [HomeController::class, 'index'])->name('home');
-        Route::resource('products', ProductController::class);
-        Route::resource('roles',  RoleController::class);
-        Route::resource('permissions',  PermissionController::class);
-
-        Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-            \UniSharp\LaravelFilemanager\Lfm::routes();
-        });
-    });
+Route::middleware(['auth', 'verified'])->group(function (){
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::resource('products', ProductController::class);
+    Route::resource('roles',  RoleController::class);
+    Route::resource('permissions',  PermissionController::class);
 
     Route::prefix('component')->group(function(){
         Route::get('province', [ComponentController::class, 'province'])->name('component.province');
@@ -60,3 +54,7 @@ Route::middleware('auth')->group(function (){
         Route::get('province/{provinceId}/city/{cityId}/district/{districtName}', [ComponentController::class, 'subDistricts'])->name('component.subDistricts');
     });
 });
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+        \UniSharp\LaravelFilemanager\Lfm::routes();
+    });
