@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('product_id')->unsigned();
             $table->bigInteger('variant_id')->unsigned();
+            $table->json('value_options');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('product_id')->references('id')->on('products');

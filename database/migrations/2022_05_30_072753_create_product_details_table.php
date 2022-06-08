@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('product_details', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('product_id')->unsigned();
-            $table->string('meta_title')->nullable;
+            $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
             $table->string('meta_image')->nullable();
             $table->string('slug');

@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('contact_groups', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('company_id')->unsigned();
-            $table->enum('group_type', ['Suppliers', 'Customers', 'Advertisers']);
             $table->string('name');
             $table->text('description')->nullable();
             $table->bigInteger('selling_price_group_id')->unsigned();
