@@ -17,9 +17,6 @@ return new class extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->string('meta_title')->nullable;
-            $table->string('meta_description')->nullable();
-            $table->string('meta_image')->nullable();
             $table->string('slug');
             $table->string('name');
             $table->text('icon_path')->nullable();

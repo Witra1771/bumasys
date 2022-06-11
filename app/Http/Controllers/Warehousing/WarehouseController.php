@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\System;
+namespace App\Http\Controllers\Warehousing;
 
+use App\Models\Warehousing\Warehouse;
+use App\Http\Requests\Warehousing\StoreWarehouseRequest;
+use App\Http\Requests\Warehousing\UpdateWarehouseRequest;
 use App\Http\Controllers\Controller;
-use App\Models\System\Setting;
-use App\Http\Requests\System\StoreSettingRequest;
-use App\Http\Requests\System\UpdateSettingRequest;
 
-class SettingController extends Controller
+class WarehouseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class SettingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreSettingRequest  $request
+     * @param  \App\Http\Requests\StoreWarehouseRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSettingRequest $request)
+    public function store(StoreWarehouseRequest $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class SettingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\System\Setting  $setting
+     * @param  \App\Models\Warehoushing\Warehouse  $warehouse
      * @return \Illuminate\Http\Response
      */
-    public function show(Setting $setting)
+    public function show(Warehouse $warehouse)
     {
         //
     }
@@ -54,10 +54,10 @@ class SettingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\System\Setting  $setting
+     * @param  \App\Models\Warehoushing\Warehouse  $warehouse
      * @return \Illuminate\Http\Response
      */
-    public function edit(Setting $setting)
+    public function edit(Warehouse $warehouse)
     {
         //
     }
@@ -65,11 +65,11 @@ class SettingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateSettingRequest  $request
-     * @param  \App\Models\System\Setting  $setting
+     * @param  \App\Http\Requests\UpdateWarehouseRequest  $request
+     * @param  \App\Models\Warehoushing\Warehouse  $warehouse
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSettingRequest $request, Setting $setting)
+    public function update(UpdateWarehouseRequest $request, Warehouse $warehouse)
     {
         //
     }
@@ -77,10 +77,10 @@ class SettingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\System\Setting  $setting
+     * @param  \App\Models\Warehoushing\Warehouse  $warehouse
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Setting $setting)
+    public function destroy(Warehouse $warehouse)
     {
         //
     }

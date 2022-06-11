@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\System;
+namespace App\Http\Controllers\Warehousing;
 
+use App\Models\Warehousing\Inventory;
+use App\Http\Requests\Warehousing\StoreInventoryRequest;
+use App\Http\Requests\Warehousing\UpdateInventoryRequest;
 use App\Http\Controllers\Controller;
-use App\Models\System\Setting;
-use App\Http\Requests\System\StoreSettingRequest;
-use App\Http\Requests\System\UpdateSettingRequest;
 
-class SettingController extends Controller
+class InventoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class SettingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreSettingRequest  $request
+     * @param  \App\Http\Requests\StoreInventoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSettingRequest $request)
+    public function store(StoreInventoryRequest $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class SettingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\System\Setting  $setting
+     * @param  \App\Models\Warehoushing\Inventory  $inventory
      * @return \Illuminate\Http\Response
      */
-    public function show(Setting $setting)
+    public function show(Inventory $inventory)
     {
         //
     }
@@ -54,10 +54,10 @@ class SettingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\System\Setting  $setting
+     * @param  \App\Models\Warehoushing\Inventory  $inventory
      * @return \Illuminate\Http\Response
      */
-    public function edit(Setting $setting)
+    public function edit(Inventory $inventory)
     {
         //
     }
@@ -65,11 +65,11 @@ class SettingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateSettingRequest  $request
-     * @param  \App\Models\System\Setting  $setting
+     * @param  \App\Http\Requests\UpdateInventoryRequest  $request
+     * @param  \App\Models\Warehoushing\Inventory  $inventory
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSettingRequest $request, Setting $setting)
+    public function update(UpdateInventoryRequest $request, Inventory $inventory)
     {
         //
     }
@@ -77,10 +77,10 @@ class SettingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\System\Setting  $setting
+     * @param  \App\Models\Warehoushing\Inventory  $inventory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Setting $setting)
+    public function destroy(Inventory $inventory)
     {
         //
     }

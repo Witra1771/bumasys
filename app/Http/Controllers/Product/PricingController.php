@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\System;
+namespace App\Http\Controllers\Product;
 
+use App\Models\Product\Pricing;
+use App\Http\Requests\Product\StorePricingRequest;
+use App\Http\Requests\Product\UpdatePricingRequest;
 use App\Http\Controllers\Controller;
-use App\Models\System\Setting;
-use App\Http\Requests\System\StoreSettingRequest;
-use App\Http\Requests\System\UpdateSettingRequest;
 
-class SettingController extends Controller
+class PricingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class SettingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreSettingRequest  $request
+     * @param  \App\Http\Requests\StorePricingRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSettingRequest $request)
+    public function store(StorePricingRequest $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class SettingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\System\Setting  $setting
+     * @param  \App\Models\Product\Pricing  $pricing
      * @return \Illuminate\Http\Response
      */
-    public function show(Setting $setting)
+    public function show(Pricing $pricing)
     {
         //
     }
@@ -54,10 +54,10 @@ class SettingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\System\Setting  $setting
+     * @param  \App\Models\Product\Pricing  $pricing
      * @return \Illuminate\Http\Response
      */
-    public function edit(Setting $setting)
+    public function edit(Pricing $pricing)
     {
         //
     }
@@ -65,11 +65,11 @@ class SettingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateSettingRequest  $request
-     * @param  \App\Models\System\Setting  $setting
+     * @param  \App\Http\Requests\UpdatePricingRequest  $request
+     * @param  \App\Models\Product\Pricing  $pricing
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSettingRequest $request, Setting $setting)
+    public function update(UpdatePricingRequest $request, Pricing $pricing)
     {
         //
     }
@@ -77,10 +77,10 @@ class SettingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\System\Setting  $setting
+     * @param  \App\Models\Product\Pricing  $pricing
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Setting $setting)
+    public function destroy(Pricing $pricing)
     {
         //
     }

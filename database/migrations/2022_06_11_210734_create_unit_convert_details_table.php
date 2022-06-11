@@ -13,19 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_details', function (Blueprint $table) {
+        Schema::create('product_unit_convert_details', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('product_id')->unsigned();
-            $table->string('slug');
-            $table->string('name')->nullable();
-            $table->string('sku')->nullable();
-            $table->integer('stock');
-            $table->decimal('price');
-            $table->json('group_price')->nullable(); // if the selling price group is more than 0
-            $table->text('image_path')->nullable();
+            $table->bigInteger('default_product_unit_id')->unsigned();
+            $table->integer('conversion_value');
+            $table->bigInteger('to_product_unit_id')->unsigned();
+            $table->integer('price')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('default_product_unit_id')->references('id')->on('product_units');
+            $table->foreign('to_product_unit_id')->references('id')->on('product_units');
         });
     }
 
@@ -36,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('details');
+        Schema::dropIfExists('unit_convert_details');
     }
 };

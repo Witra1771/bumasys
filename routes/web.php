@@ -41,11 +41,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('roles',  RoleController::class);
+Route::resource('permissions',  PermissionController::class);
+
 Route::middleware(['auth', 'verified'])->group(function (){
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::resource('products', ProductController::class);
-    Route::resource('roles',  RoleController::class);
-    Route::resource('permissions',  PermissionController::class);
+
 
     Route::prefix('component')->group(function(){
         Route::get('province', [ComponentController::class, 'province'])->name('component.province');
