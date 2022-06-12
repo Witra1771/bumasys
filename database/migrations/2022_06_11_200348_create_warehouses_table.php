@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('warehousing_warehouses', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('company_id')->unsigned();
             $table->string('name');
             $table->text('address');
             $table->text('description');

@@ -5,7 +5,7 @@ namespace Database\Factories\Warehoushing;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Warehoushing\Inventory>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Warehousing\Inventory>
  */
 class InventoryFactory extends Factory
 {

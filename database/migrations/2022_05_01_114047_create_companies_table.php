@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('vat_number')->nullable();
             $table->string('phone_number')->nullable();
             $table->text('address');
-            $table->text('company_infromation');
+            $table->text('company_information');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');

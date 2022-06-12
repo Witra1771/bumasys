@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\RoleController;
 use App\Http\Controllers\Auth\PermissionController;
-use App\Http\Controllers\Product\ProductController;
-use App\Http\Controllers\Common\ComponentController;
+use App\Http\Controllers\Web\Product\ProductController;
+use App\Http\Controllers\Web\Common\ComponentController;
 
 /*
 |--------------------------------------------------------------------------

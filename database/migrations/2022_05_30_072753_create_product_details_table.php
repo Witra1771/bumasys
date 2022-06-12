@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('slug');
             $table->string('name')->nullable();
             $table->string('sku')->nullable();
-            $table->integer('stock');
-            $table->decimal('price');
             $table->json('group_price')->nullable(); // if the selling price group is more than 0
             $table->text('image_path')->nullable();
             $table->timestamps();
