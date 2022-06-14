@@ -1,3 +1,383 @@
 Table users as U {
-  
+  id bigint [pk, increment] // auto-increment
+  slug varchar
+  name varchar
+  email varchar
+  email_verified_at timestamp [null]
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table roles {
+  id bigint [pk, increment]
+  name varchar
+}
+
+Table permissions {
+  id bigint [pk, increment]
+  name varchar
+}
+
+Table role_has_permission {
+  role_id bigint
+  permission_id bigint
+}
+
+Ref: role_has_permission.role_id > roles.id
+Ref: role_has_permission.permission_id > permissions.id
+
+Table user_has_role {
+  user_id bigint
+  role_id bigint
+}
+
+Ref: user_has_role.user_id - users.id
+Ref: user_has_role.role_id - roles.id
+
+
+Table companies {
+  id bigint [pk, increment]
+  user_id bigint
+  name varchar
+  slug varchar
+  icon_path text [null]
+  logo_path text [null]
+  vat_number varchar [null]
+  phone_number varchar
+  address text
+  company_information varchar [null]
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+ }
+ 
+ Ref: companies.user_id - users.id
+ 
+ Table company_settings {
+   id bigint [pk, increment]
+   company_id bigint
+   currency string [default: "IDR"]
+   currency_symbol_placement cur_symbol_placement [default: "Before Amount"]
+   date_format date_format [default: "dd/mm/yy"]
+   time_format time_format [default: "24 Hour"]
+   time_zone varchar [default: "Asia/Jakarta"]
+   trx_editable_type trx_editable_type [default: "By Status"]
+   trx_editable_by_days integer [default: 7]
+   trx_editable_by_status varchar [default: "Completed"]
+   product_sku_prefix varchar [null]
+   product_default_unit_id bigint
+   invoice_format json [null]
+   payment_format json [null]
+   created_at timestamp
+   updated_at timestamp
+   deleted_at timestamp
+ }
+ 
+ Enum cur_symbol_placement {
+   "Before Amount"
+   "After Amount"
+ }
+ 
+ Enum date_format {
+   "mm/dd/yy"
+   "dd/mm/yy"
+   "mm-dd-yy"
+   "dd-mm-yy"
+ }
+ 
+ Enum time_format {
+   "24 Hour"
+   "12 Hour"
+ }
+ 
+ Enum trx_editable_type {
+   "By Days"
+   "By Status"
+ }
+ 
+ Ref: company_settings.company_id - companies.id
+ 
+ Table contacts {
+   id bigint [pk, increment]
+   user_id bigint
+   group_id  bigint
+   company_id bigint
+   is_can_login boolean [default: 0]
+   is_active boolean [default: 1]
+   contact_type contact_type [default: "customer"]
+   is_individual boolean [default:1]
+   name varchar 
+   phone_number varchar
+   email varchar [null]
+   address text
+   created_at timestamp
+   updated_at timestamp
+   deleted_at timestamp
+ }
+ 
+ Enum contact_type {
+  supplier
+  customer
+  partner
+ }
+ 
+ Ref: companies.id < contacts.company_id
+ Ref: contacts.user_id < users.id
+ Ref: contacts.group_id > contact_groups.id
+ 
+ Table contact_groups {
+   id bigint [pk, increment]
+   company_id bigint
+   selling_price_group bigint
+   name varchar
+   description text
+   created_at timestamp
+   updated_at timestamp
+   deleted_at timestamp
+ }
+ 
+ Ref: companies.id < contact_groups.company_id
+ 
+ Table product_waranties {
+   id bigint [pk, increment]
+   company_id bigint
+   name varchar
+   description text
+   duration integer [default: 1]
+   duration_type duration_type [default: "Months"]
+   created_at timestamp
+   updated_at timestamp
+   deleted_at timestamp
+ }
+ 
+ Enum duration_type {
+   Days
+   Months
+   Years
+ }
+ 
+  Ref: companies.id < product_waranties.company_id
+ 
+ Table product_unit {
+   id bigint [pk, increment]
+   company_id bigint
+   name varchar
+   short_name varchar
+   is_decimal boolean [default: 0]
+   created_at timestamp
+   updated_at timestamp
+   deleted_at timestamp
+ }
+ 
+  Ref: companies.id < product_unit.company_id
+
+Table product_category {
+  id bigint [pk, increment]
+  company_id bigint
+  meta_tags json
+  slug varchar
+  name varchar
+  image_path text [null]
+  category_code varchar [null]
+  description text [null]
+  parent bigint [default: 0]
+}
+
+ Ref: companies.id < product_category.company_id
+ Ref: product_category.parent - product_category.id
+
+Table product_brand {
+  id bigint [pk, increment]
+  company_id bigint
+  meta_tags json
+  slug varchar
+  name varchar
+  image_path text [null]
+  description text[null]
+}
+
+ Ref: companies.id < product_brand.company_id
+
+Table products {
+  id bigint [pk, increment]
+  company_id bigint
+  product_brand_id bigint
+  product_category_id bigint
+  product_sub_category_id bigint
+  product_waranties_id bigint
+  meta_tags json
+  slug varchar
+  name varchar
+  description text 
+  short_description varchar [null]
+  weight decimal 
+  is_sale boolean [default: 1]
+  is_managed_stock boolean [default: 1]
+  image_path text [null]
+  brochure_path text [null]
+  product_type product_type [default: "single"]
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Enum product_type {
+  single
+  variable
+  package
+}
+
+ Ref: products.company_id > companies.id
+ Ref: products.product_brand_id > product_brand.id
+ Ref: products.product_category_id > product_category.id
+ Ref: products.product_sub_category_id > product_category.id
+ Ref: products.product_waranties_id > product_waranties.id
+ 
+ Table product_details {
+   id bigint [pk, increment]
+   product_id bigint
+   slug varchar
+   name varchar [null]
+   variant_name json [null]
+   group_price json [null]
+   image_path text [null]
+   created_at timestamp
+   updated_at timestamp
+   deleted_at timestamp
+ }
+ 
+ Ref: products.id < product_details.product_id
+
+ Table product_variations {
+   id bigint [pk, increment]
+   product_id bigint
+   variantion_enabled json
+   created_at timestamp
+   deleted_at timestamp
+   updated_at timestamp
+ }
+ 
+ Ref: products.id < product_variations.product_id
+
+Table product_package_details {
+  product_id_package bigint
+  product_id bigint
+  created_at timestamp
+  updated_at timestamp
+} 
+ 
+  Ref: products.id < product_package_details.product_id_package
+  Ref: products.id < product_package_details.product_id
+ 
+Table product_selling_price_group {
+  id bigint [pk, increment]
+  company_id bigint
+  name varchar
+  description varchar
+  is_active boolean [default: 1]
+  created_at timestamp
+  deleted_at timestamp
+  updated_at timestamp
+}
+
+ Ref: product_selling_price_group.company_id > companies.id
+
+Table product_pricings {
+  id bigint [pk, increment]
+  product_id bigint
+  price json
+  cost integer [default: 0]
+  created_at timestamp
+  deleted_at timestamp
+  updated_at timestamp
+}
+
+ Ref: products.id < product_pricings.product_id
+
+Table warehouses {
+  id bigint [pk, increment]
+  company_id bigint
+  name varchar
+  address text
+  description text [null]
+  phone_number varchar
+  email varchar [null]
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+ Ref: companies.id < warehouses.company_id
+ 
+ Table inventories {
+   id bigint [pk, increment]
+   company_id bigint
+   product_id bigint
+   product_detail_id bigint
+   warehouse_id bigint
+   product_unit bigint
+   sku varchar [null]
+   barcode varchar [null]
+   stock integer
+   scurity_stock integer [default: 2]
+   created_at timestamp
+   updated_at timestamp
+   deleted_at timestamp
+ }
+
+ Ref: companies.id < inventories.company_id
+ Ref: product_unit.id - inventories.product_unit
+ Ref: products.id < inventories.product_id
+ Ref: warehouses.id < inventories.warehouse_id
+ Ref: product_details.id - inventories.product_detail_id
+
+Table product_unit_convert_details {
+  id bigint [pk, increment]
+  product_id bigint
+  default_product_unit_id bigint
+  conversion_value integer
+  to_product_unit_id bigint
+  price json
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+ Ref: products.id < product_unit_convert_details.product_id
+ Ref: product_unit.id < product_unit_convert_details.default_product_unit_id
+ Ref: companies.id < product_unit_convert_details.to_product_unit_id
+ 
+ Table taxes {
+   id bigint [pk, increment]
+   company_id bigint
+   name varchar
+   rate integer
+   created_at timestamp
+   updated_at timestamp
+   deleted_at timestamp
+ }
+ 
+ Ref: companies.id < taxes.company_id
+
+Table orders {
+  id bigint [pk, increment]
+  company_id bigint
+}
+
+Table order_details {
+  id bigint [pk, increment]
+  order_id bigint
+}
+
+Table invoices {
+  id bigint [pk, increment]
+}
+
+Table bills {
+  id bigint [pk, increment]
+}
+
+Table payments {
+  id bigint [pk, increment]
 }
