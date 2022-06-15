@@ -1,8 +1,8 @@
 Table users as U {
   id bigint [pk, increment] // auto-increment
-  slug varchar
-  name varchar
-  email varchar
+  slug string
+  name string
+  email string
   email_verified_at timestamp [null]
   created_at timestamp
   updated_at timestamp
@@ -11,12 +11,15 @@ Table users as U {
 
 Table roles {
   id bigint [pk, increment]
-  name varchar
+  company_id bigint
+  name string
 }
+
+Ref: roles.company_id > companies.id
 
 Table permissions {
   id bigint [pk, increment]
-  name varchar
+  name string
 }
 
 Table role_has_permission {
@@ -39,14 +42,19 @@ Ref: user_has_role.role_id - roles.id
 Table companies {
   id bigint [pk, increment]
   user_id bigint
-  name varchar
-  slug varchar
+  name string
+  slug string
   icon_path text [null]
   logo_path text [null]
-  vat_number varchar [null]
-  phone_number varchar
+  vat_number string [null]
+  phone_number string
+  province string
+  city string
+  district string
+  sub_district string
+  zip_code integer
   address text
-  company_information varchar [null]
+  company_information string [null]
   created_at timestamp
   updated_at timestamp
   deleted_at timestamp
@@ -61,13 +69,14 @@ Table companies {
    currency_symbol_placement cur_symbol_placement [default: "Before Amount"]
    date_format date_format [default: "dd/mm/yy"]
    time_format time_format [default: "24 Hour"]
-   time_zone varchar [default: "Asia/Jakarta"]
-   trx_editable_type trx_editable_type [default: "By Status"]
+   time_zone string [default: "Asia/Jakarta"]
+   trx_editable_type trx_editable_type [default: "by status"]
    trx_editable_by_days integer [default: 7]
-   trx_editable_by_status varchar [default: "Completed"]
-   product_sku_prefix varchar [null]
+   trx_editable_by_status string [default: "completed"]
+   product_sku_prefix string [null]
    product_default_unit_id bigint
    invoice_format json [null]
+   bill_format json [null]
    payment_format json [null]
    created_at timestamp
    updated_at timestamp
@@ -75,8 +84,8 @@ Table companies {
  }
  
  Enum cur_symbol_placement {
-   "Before Amount"
-   "After Amount"
+   "before amount"
+   "after amunt"
  }
  
  Enum date_format {
@@ -87,13 +96,13 @@ Table companies {
  }
  
  Enum time_format {
-   "24 Hour"
-   "12 Hour"
+   "24 hour"
+   "12 hour"
  }
  
  Enum trx_editable_type {
-   "By Days"
-   "By Status"
+   "by days"
+   "by status"
  }
  
  Ref: company_settings.company_id - companies.id
@@ -107,10 +116,15 @@ Table companies {
    is_active boolean [default: 1]
    contact_type contact_type [default: "customer"]
    is_individual boolean [default:1]
-   name varchar 
-   phone_number varchar
-   email varchar [null]
-   address text
+   name string 
+   phone_number string
+   email string [null]
+  province string
+  city string
+  district string
+  sub_district string
+  zip_code integer
+  address text
    created_at timestamp
    updated_at timestamp
    deleted_at timestamp
@@ -130,7 +144,7 @@ Table companies {
    id bigint [pk, increment]
    company_id bigint
    selling_price_group bigint
-   name varchar
+   name string
    description text
    created_at timestamp
    updated_at timestamp
@@ -142,19 +156,19 @@ Table companies {
  Table product_waranties {
    id bigint [pk, increment]
    company_id bigint
-   name varchar
+   name string
    description text
    duration integer [default: 1]
-   duration_type duration_type [default: "Months"]
+   duration_type duration_type [default: "months"]
    created_at timestamp
    updated_at timestamp
    deleted_at timestamp
  }
  
  Enum duration_type {
-   Days
-   Months
-   Years
+   days
+   months
+   years
  }
  
   Ref: companies.id < product_waranties.company_id
@@ -162,8 +176,8 @@ Table companies {
  Table product_unit {
    id bigint [pk, increment]
    company_id bigint
-   name varchar
-   short_name varchar
+   name string
+   short_name string
    is_decimal boolean [default: 0]
    created_at timestamp
    updated_at timestamp
@@ -176,23 +190,23 @@ Table product_category {
   id bigint [pk, increment]
   company_id bigint
   meta_tags json
-  slug varchar
-  name varchar
+  slug string
+  name string
   image_path text [null]
-  category_code varchar [null]
+  category_code string [null]
   description text [null]
   parent bigint [default: 0]
 }
 
  Ref: companies.id < product_category.company_id
- Ref: product_category.parent - product_category.id
+ Ref: product_category.parent > product_category.id
 
 Table product_brand {
   id bigint [pk, increment]
   company_id bigint
   meta_tags json
-  slug varchar
-  name varchar
+  slug string
+  name string
   image_path text [null]
   description text[null]
 }
@@ -207,10 +221,10 @@ Table products {
   product_sub_category_id bigint
   product_waranties_id bigint
   meta_tags json
-  slug varchar
-  name varchar
+  slug string
+  name string
   description text 
-  short_description varchar [null]
+  short_description string [null]
   weight decimal 
   is_sale boolean [default: 1]
   is_managed_stock boolean [default: 1]
@@ -237,8 +251,8 @@ Enum product_type {
  Table product_details {
    id bigint [pk, increment]
    product_id bigint
-   slug varchar
-   name varchar [null]
+   slug string
+   name string [null]
    variant_name json [null]
    group_price json [null]
    image_path text [null]
@@ -273,8 +287,8 @@ Table product_package_details {
 Table product_selling_price_group {
   id bigint [pk, increment]
   company_id bigint
-  name varchar
-  description varchar
+  name string
+  description string
   is_active boolean [default: 1]
   created_at timestamp
   deleted_at timestamp
@@ -287,7 +301,7 @@ Table product_pricings {
   id bigint [pk, increment]
   product_id bigint
   price json
-  cost integer [default: 0]
+  cost json [default: 0]
   created_at timestamp
   deleted_at timestamp
   updated_at timestamp
@@ -298,11 +312,11 @@ Table product_pricings {
 Table warehouses {
   id bigint [pk, increment]
   company_id bigint
-  name varchar
+  name string
   address text
   description text [null]
-  phone_number varchar
-  email varchar [null]
+  phone_number string
+  email string [null]
   created_at timestamp
   updated_at timestamp
   deleted_at timestamp
@@ -317,9 +331,11 @@ Table warehouses {
    product_detail_id bigint
    warehouse_id bigint
    product_unit bigint
-   sku varchar [null]
-   barcode varchar [null]
+   sku string [null]
+   barcode string [null]
    stock integer
+   cost integer [null]
+   contact_id bigint [null]
    scurity_stock integer [default: 2]
    created_at timestamp
    updated_at timestamp
@@ -331,6 +347,20 @@ Table warehouses {
  Ref: products.id < inventories.product_id
  Ref: warehouses.id < inventories.warehouse_id
  Ref: product_details.id - inventories.product_detail_id
+ Ref: contacts.id < inventories.contact_id
+
+Table inventory_histories {
+  id bigint [pk, increment]
+  inventory_id bigint
+  product_id bigint
+  product_detail_id bigint
+  quantity integer
+  order_id string
+}
+
+Ref: inventories.id < inventory_histories.inventory_id
+Ref: products.id < inventory_histories.product_id
+Ref: product_details.id < inventory_histories.product_detail_id
 
 Table product_unit_convert_details {
   id bigint [pk, increment]
@@ -351,7 +381,7 @@ Table product_unit_convert_details {
  Table taxes {
    id bigint [pk, increment]
    company_id bigint
-   name varchar
+   name string
    rate integer
    created_at timestamp
    updated_at timestamp
@@ -363,21 +393,246 @@ Table product_unit_convert_details {
 Table orders {
   id bigint [pk, increment]
   company_id bigint
+  order_type order_type [default: "selling"]
+  order_id string [note: "sesuai dengan company_settings"]
+  user_id bigint
+  contact_id bigint
+  logistic_id bigint
+  logistic_service_id bigint
+  tax_id bigint [null]
+  warehouse_id bigint
+  discount_id bigint [null]
+  discount_amount integer [null]
+  is_repeat_order boolean [default: 0]
+  receipt string [null]
+  shipping_fee integer [default: 0]
+  shipping_address json [note: "province, city, district, sub_district, zip_code"]
+  cod_fee integer [default: 0]
+  status order_status [default: "order placed"]
+  message_for_packer text [null]
+  message_for_logistic text [null]
+  qty_amount integer
+  weight decimal
+  amount integer
+  order_note text [null]
+  order_attachment text [null]
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
 }
+
+Enum order_type {
+  "selling"
+  "purchase"
+}
+
+Enum order_status {
+  "order placed"
+  "packed"
+  "shipping"
+  "awaiting receipt"
+  "delivered"
+  "awaiting payment"
+  "completed"
+  "cancelled"
+  "declined"
+  "refunded"
+  "returns"
+}
+
+Ref: companies.id < orders.company_id
+Ref: contacts.id < orders.contact_id
+Ref: users.id < orders.user_id
+Ref: logistics.id < orders.logistic_id
+Ref: logistic_services.id < orders.logistic_service_id
+Ref: taxes.id < orders.tax_id
+Ref: warehouses.id < orders.warehouse_id
+Ref: discounts.id < orders.discount_id
+
+Table discounts {
+  id bigint [pk, increment]
+  company_id bigint
+  name string [null]
+  code string [null]
+  discount_type discount_type [default: "coupon code"]
+  is_unlimited boolean [default: 1]
+  discount_limit integer [null]
+  coupon_type coupon_type [default: "flat"]
+  discount_fee integer [null]
+  start_date timestamp
+  end_date timestamp
+  is_never_expired boolean [default: 0]
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Enum discount_type {
+  "coupon code"
+  "promotion"
+}
+
+Enum coupon_type {
+  "flat"
+  "percentage"
+  "free shipping"
+  "same price"
+}
+
+Ref: companies.id < discounts.company_id
 
 Table order_details {
   id bigint [pk, increment]
   order_id bigint
+  product_id bigint
+  product_unit_id bigint
+  product_note string [null]
+  cust_rate integer [note: "harga barang satuan sesuai unit"]
+  partner_rate integer [note: "harga barang satuan sesuai unit"]
+  quantity integer
+  weight decimal
+  cust_amount integer
+  partner_amount integer
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
 }
+
+Ref: orders.id < order_details.order_id
+Ref: products.id < order_details.product_id
+Ref: product_unit.id < order_details.product_unit_id
+
+Table logistics {
+  id bigint [pk, increment]
+  company_id bigint
+  name string
+  code string
+  image_path text
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Ref: companies.id < logistics.company_id
+
+Table logistic_services {
+  id bigint [pk, increment]
+  logistic_id bigint
+  name string
+  is_req_receipt boolean [default: 0]
+  cod_fee integer
+  discount_fee integer
+  returns_fee_formula text
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Ref: logistics.id < logistic_services.logistic_id
 
 Table invoices {
   id bigint [pk, increment]
+  company_id bigint
+  invoice_number string [note: "sesuai dengan company_settings"]
+  order_id bigint
+  cust_payment_method payment_method [default: "transfer"]
+  cust_payment_status payment_status [default: "unpaid"]
+  cust_billing_address json [note: "[province, city, district, sub_district, zip_code]"]
+  partner_payment_method payment_method [default: "transfer"]
+  partner_payment_status payment_status [default: "unpaid"]
+  partner_billing_address json [note: "[province, city, district, sub_district, zip_code]"]
+  terms_type terms_type
+  terms integer [default: 3]
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
 }
+
+Enum terms_type {
+  "days"
+  "days after status is completed"
+}
+
+Enum payment_method {
+  cod
+  marketplace
+  transfer
+}
+
+Enum payment_status {
+  unpaid
+  partially
+  paid
+}
+
+Ref: invoices.order_id - orders.id
+Ref: invoices.company_id > companies.id
 
 Table bills {
   id bigint [pk, increment]
+  company_id bigint
+  bill_number string [note: "sesuai dengan company_settings"]
+  order_id bigint
+  payement_method payment_method [default: "transfer"]
+  payment_status payment_status [default: "unpaid"]
+  terms_type terms_type
+  terms integer [default: 3]
+  billing_address json [note: "[province, city, district, sub_district, zip_code]"]
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
 }
 
-Table payments {
+Ref: bills.order_id - orders.id
+Ref: bills.company_id > companies.id
+
+Table payment_histories {
   id bigint [pk, increment]
+  number string [note: "Invoice / Bill Number"]
+  from_account_id bigint [null]
+  to_account_id bigint
+  user_id bigint
+  amount integer
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
 }
+
+Ref: payment_histories.number > invoices.invoice_number
+Ref: payment_histories.number > bills.bill_number
+Ref: payment_histories.from_account_id > accounts.id
+Ref: payment_histories.to_account_id > accounts.id
+Ref: payment_histories.user_id > users.id
+
+Table accounts {
+  id bigint [pk, increment]
+  company_id bigint
+  parent bigint [default: 0]
+  account_category_id bigint
+  name string
+  amount bigint [default: 0]
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Ref: accounts.id < accounts.parent
+Ref: account_categories.id < accounts.account_category_id
+Ref: companies.id < accounts.company_id
+
+Table account_categories {
+  id bigint [pk, increment]
+  company_id bigint
+  account_category_type account_category_type
+  name string
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Enum account_category_type {
+  pendapatan
+  pengeluaran
+}
+
+Ref: companies.id < account_categories.company_id
