@@ -17,4 +17,6 @@ return [
     'prepend_city' => 'Select City',
     'prepend_district' => 'Select District',
     'prepend_sub_district' => 'Select Sub District',
+    'prepend_currency' => 'Select Currency',
+    'prepend_timezone' => 'Select Timezone',
 ];

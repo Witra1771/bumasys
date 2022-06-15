@@ -4,11 +4,6 @@ namespace App\Traits\Common;
 
 trait AddressService {
 
-    function __construct()
-    {
-//        $this->middleware(['auth','verified']);
-    }
-
    public function getProvince(){
        return json_decode(file_get_contents(resource_path() . "/common/address/provincy_list.json"), true);
    }

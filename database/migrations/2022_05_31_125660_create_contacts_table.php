@@ -19,7 +19,7 @@ return new class extends Migration
             $table->bigInteger('company_id')->unsigned();
             $table->boolean('is_can_login')->default(false);
             $table->boolean('is_active')->default(true);
-            $table->enum('contact_type', ['Suppliers', 'Customers', 'Advertisers']);
+            $table->enum('contact_type', ['Suppliers', 'Customers']);
             $table->boolean('is_individual')->default(true);
             $table->string('contact_id');
             $table->string('name');

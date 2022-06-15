@@ -3,19 +3,21 @@
 namespace App\Http\Controllers\Web\Common;
 
 use App\Traits\Common\AddressService;
+use App\Traits\Common\CurrenciesService;
+use App\Traits\Common\TimezoneService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 
 class ComponentController extends Controller
 {
-    use AddressService;
+    use AddressService, CurrenciesService, TimezoneService;
 
     /**
      * Display a listing of the province resource.
      *
      * @return Collection
      */
-    public function province(): Collection
+    public function provinces(): Collection
     {
         return collect($this->getProvince())->prepend(__('component.prepend_province'), "");
     }
@@ -56,5 +58,21 @@ class ComponentController extends Controller
     public function subDistricts($provinceId, $cityId, $districtName): Collection
     {
         return collect($this->getSubDistrict($provinceId, $cityId, $districtName))->pluck('kelurahan', 'kodepos')->prepend(__('component.prepend_sub_district'), "");
+    }
+
+    /**
+     * @return Collection
+     */
+    public function currencies(): Collection
+    {
+        return collect($this->getCurrency())->prepend(__('component.prepend_currency'), "");
+    }
+
+    /**
+     * @return Collection
+     */
+    public function timezones(): Collection
+    {
+        return collect($this->getTimezone())->prepend(__('component.prepend_timezone'), "");
     }
 }

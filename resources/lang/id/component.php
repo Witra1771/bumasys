@@ -17,4 +17,6 @@ return [
     'prepend_city' => 'Pilih Kota',
     'prepend_district' => 'Pilih Kecamatan',
     'prepend_sub_district' => 'Pilih Kelurahan',
+    'prepend_currency' => 'Pilih Mata Uang',
+    'prepend_timezone' => 'Pilih Zona Waktu',
 ];

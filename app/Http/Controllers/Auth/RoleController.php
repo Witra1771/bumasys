@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\Permission\StoreRoleRequest;
-use App\Http\Requests\Permission\UpdateRoleRequest;
+//use App\Http\Requests\Auth\StoreRoleRequest;
+//use App\Http\Requests\Auth\UpdateRoleRequest;
+use Illuminate\Validation\ValidationException;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
@@ -25,9 +30,10 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Application|Factory|View
      */
-    public function index(Request $request)
+    public function index(Request $request): View|Factory|Application
     {
         $roles = Role::orderBy('id', 'DESC')->get();
 
@@ -39,9 +45,9 @@ class RoleController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): Application|Factory|View
     {
         $permissions = Permission::orderBy('name', 'ASC')->get();
         return view('auth.roles.create')->with([
@@ -52,10 +58,11 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws ValidationException
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $messages = [
             'required' => ':attribute harus diisi!',
@@ -72,7 +79,13 @@ class RoleController extends Controller
         return redirect()->route('roles.index')->with('success','Role Berhasil Ditambahkan!');
     }
 
-    public function edit($id)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param int $id
+     * @return Factory|View|Application
+     */
+    public function edit(int $id): Factory|View|Application
     {
         $tittle = 'role';
         $role = Role::find($id);
@@ -84,7 +97,15 @@ class RoleController extends Controller
         return view('auth.roles.edit',compact('role','permission','rolePermissions', 'tittle'));
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
+     * @throws ValidationException
+     */
+    public function update(Request $request, $id): RedirectResponse
     {
         $messages = [
             'required' => ':attribute harus diisi!',
@@ -107,10 +128,10 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(int $id): RedirectResponse
     {
         DB::table("roles")->where('id',$id)->delete();
         return redirect()->route('roles.index')->with('success','Role Berhasil Dihapus');

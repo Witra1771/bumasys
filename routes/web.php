@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\RoleController;
 use App\Http\Controllers\Auth\PermissionController;
 use App\Http\Controllers\Web\Product\ProductController;
 use App\Http\Controllers\Web\Common\ComponentController;
+use UniSharp\LaravelFilemanager\Lfm;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,13 +45,14 @@ Route::get('/', function () {
 Route::resource('roles',  RoleController::class);
 Route::resource('permissions',  PermissionController::class);
 
-Route::middleware(['auth', 'verified'])->group(function (){
+Route::middleware(['web', 'auth', 'verified'])->group(callback: function (){
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::resource('products', ProductController::class);
 
-
-    Route::prefix('component')->group(function(){
-        Route::get('province', [ComponentController::class, 'province'])->name('component.province');
+    Route::prefix('component')->group(callback: function(){
+        Route::get('timezones', [ComponentController::class, 'timezones'])->name('component.timezones');
+        Route::get('currencies', [ComponentController::class, 'currencies'])->name('component.currencies');
+        Route::get('province', [ComponentController::class, 'provinces'])->name('component.provinces');
         Route::get('province/{provinceId}/city/', [ComponentController::class, 'cities'])->name('component.cities');
         Route::get('province/{provinceId}/city/{cityId}/district/', [ComponentController::class, 'districts'])->name('component.districts');
         Route::get('province/{provinceId}/city/{cityId}/district/{districtName}', [ComponentController::class, 'subDistricts'])->name('component.subDistricts');
@@ -58,5 +60,5 @@ Route::middleware(['auth', 'verified'])->group(function (){
 });
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-        \UniSharp\LaravelFilemanager\Lfm::routes();
+        Lfm::routes();
     });
