@@ -13,18 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_unit_convert_details', function (Blueprint $table) {
+        Schema::create('item_unit_convert_details', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('product_id')->unsigned();
-            $table->bigInteger('default_product_unit_id')->unsigned();
+            $table->bigInteger('item_id')->unsigned();
+            $table->bigInteger('default_item_unit_id')->unsigned();
             $table->integer('conversion_value');
-            $table->bigInteger('to_product_unit_id')->unsigned();
-            $table->integer('price')->nullable();
+            $table->bigInteger('to_item_unit_id')->unsigned();
+            $table->json('price')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('default_product_unit_id')->references('id')->on('product_units');
-            $table->foreign('to_product_unit_id')->references('id')->on('product_units');
+            $table->foreign('item_id')->references('id')->on('items');
+            $table->foreign('default_item_unit_id')->references('id')->on('item_units');
+            $table->foreign('to_item_unit_id')->references('id')->on('item_units');
         });
     }
 

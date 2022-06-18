@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_variant_options', function (Blueprint $table) {
+        Schema::create('item_has_variant', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('product_id')->unsigned();
-            $table->bigInteger('variant_id')->unsigned();
-            $table->json('value_options');
+            $table->bigInteger('item_id')->unsigned();
+            $table->bigInteger('item_variant_id')->unsigned();
+            $table->json('possible_value');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('variant_id')->references('id')->on('product_variations');
+            $table->foreign('item_id')->references('id')->on('items');
+            $table->foreign('item_variant_id')->references('id')->on('item_variations');
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('options');
+        Schema::dropIfExists('item_has_variant');
     }
 };

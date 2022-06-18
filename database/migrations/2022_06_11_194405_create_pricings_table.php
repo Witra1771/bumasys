@@ -13,13 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_pricings', function (Blueprint $table) {
+        Schema::create('item_pricings', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('product_id')->unsigned();
-            $table->integer('price');
-            $table->integer('cost');
+            $table->bigInteger('item_id')->unsigned();
+            $table->integer('price'); // For Customer
+            $table->json('group_price'); // For Group Sale or Partner
+            $table->enum('price_is', ['inc.tax', 'exc.tax']);
+            $table->bigInteger('selling_account_id')->unsigned();
+            $table->bigInteger('purchase_account_id')->unsigned();
+            $table->bigInteger('default_tax_id')->nullable();
             $table->timestamps();
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('item_id')->references('id')->on('items');
+            $table->foreign('selling_account_id')->references('id')->on('accounting_accounts');
+            $table->foreign('purchase_account_id')->references('id')->on('accounting_accounts');
         });
     }
 

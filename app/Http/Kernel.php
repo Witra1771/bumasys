@@ -71,4 +71,13 @@ class Kernel extends HttpKernel
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
         // end spatie middleware
     ];
+
+    /**
+     * Responsible for prioritizing the middleware
+     *
+     * @var array
+     */
+    protected $middlewarePriority = [
+        \App\Http\Middleware\TeamsPermission::class,
+    ];
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('company_id')->unsigned();
             $table->string('name');
             $table->integer('rate');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->foreign('company_id')->references('id')->on('companies');
         });

@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_selling_price_groups', function (Blueprint $table) {
+        Schema::create('item_selling_price_groups', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('company_id')->unsigned();
             $table->string('name');

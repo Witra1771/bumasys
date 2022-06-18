@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_units', function (Blueprint $table) {
+        Schema::create('item_units', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('company_id')->unsigned();
             $table->string('name');
             $table->string('short_name')->nullable();
-            $table->boolean('decimal')->default(0);
+            $table->boolean('is_decimal')->default(0);
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('company_id')->references('id')->on('companies');

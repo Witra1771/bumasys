@@ -21,7 +21,7 @@ return new class extends Migration
             $table->bigInteger('selling_price_group_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('selling_price_group_id')->references('id')->on('product_selling_price_groups');
+            $table->foreign('selling_price_group_id')->references('id')->on('item_selling_price_groups');
             $table->foreign('company_id')->references('id')->on('companies');
         });
     }
