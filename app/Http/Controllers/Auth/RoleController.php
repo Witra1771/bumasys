@@ -73,7 +73,7 @@ class RoleController extends Controller
             'permission' => 'required',
         ], $messages);
 
-        $role = Role::create(['name' => $request->input('name')]);
+        $role = Role::create(['name' => $request->input('name'), 'team_id' => 1]);
         $role->syncPermissions($request->input('permission'));
 
         return redirect()->route('roles.index')->with('success','Role Berhasil Ditambahkan!');
