@@ -2,5 +2,6 @@
 
 - [DBML](https://s.id/bmdbml)
 - [Relation & Use Case Diagram](https://s.id/gdappdev)
+- [UI/UX Design](https://www.figma.com/file/FkQruccMsmkPIlvrHbgDkQ/bumasis?node-id=0%3A1)
 
-Note: password protected. email me [msyalva.freelance@gmail.com](mailme:msyalva.freelance@gmail.com)
+Note: protected. email me [msyalva.freelance@gmail.com](mailme:msyalva.freelance@gmail.com)
