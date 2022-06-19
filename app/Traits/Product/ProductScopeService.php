@@ -12,7 +12,7 @@ trait ProductScopeService {
      * @param $CompaniesID
      * @return Builder
      */
-    public function scopeMyProduct($query, $CompaniesID): Builder
+    public function scopeMyProduct(Builder $query, $CompaniesID): Builder
     {
         return $query->where('company_id', $CompaniesID);
     }
@@ -24,7 +24,7 @@ trait ProductScopeService {
      * @param $CompaniesID
      * @return Builder
      */
-    public function scopeForSale($query, $CompaniesID): Builder
+    public function scopeForSale(Builder $query, $CompaniesID): Builder
     {
         return $query->where('company_id', $CompaniesID)->where('is_sale', true);
     }
@@ -36,7 +36,7 @@ trait ProductScopeService {
      * @param $CompaniesID
      * @return Builder
      */
-    public function scopeNotSale($query, $CompaniesID): Builder
+    public function scopeNotSale(Builder $query, $CompaniesID): Builder
     {
         return $query->where('company_id', $CompaniesID)->where('is_sale', true);
     }
@@ -44,10 +44,10 @@ trait ProductScopeService {
     /**
      * Scope a query to only on sale product.
      *
-     * @param  Builder  $query
+     * @param Builder $query
      * @return Builder
      */
-    public function scopeAllForSale($query): Builder
+    public function scopeAllForSale(Builder $query): Builder
     {
         return $query->where('is_sale', true);
     }
@@ -55,10 +55,10 @@ trait ProductScopeService {
     /**
      * Scope a query to only not for sale product.
      *
-     * @param  Builder  $query
+     * @param Builder $query
      * @return Builder
      */
-    public function scopeAllNotSale($query): Builder
+    public function scopeAllNotSale(Builder $query): Builder
     {
         return $query->where('is_sale', false);
     }

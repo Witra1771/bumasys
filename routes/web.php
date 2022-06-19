@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\RoleController;
 use App\Http\Controllers\Auth\PermissionController;
-use App\Http\Controllers\Web\Product\ProductController;
+use App\Http\Controllers\Web\Item\ItemController;
 use App\Http\Controllers\Web\Common\ComponentController;
 use UniSharp\LaravelFilemanager\Lfm;
 
@@ -47,7 +47,7 @@ Route::resource('permissions',  PermissionController::class);
 
 Route::middleware(['web', 'auth', 'verified'])->group(callback: function (){
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::resource('products', ProductController::class);
+    Route::resource('products', ItemController::class);
 
     Route::prefix('component')->group(callback: function(){
         Route::get('timezones', [ComponentController::class, 'timezones'])->name('component.timezones');

@@ -14,10 +14,11 @@ class Login
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $user;
+
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param $user
      */
     public function __construct($user)
     {
@@ -27,9 +28,9 @@ class Login
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return \Illuminate\Broadcasting\Channel|array
+     * @return Channel|PrivateChannel|array
      */
-    public function broadcastOn()
+    public function broadcastOn(): Channel|PrivateChannel|array
     {
         return new PrivateChannel('channel-name');
     }
