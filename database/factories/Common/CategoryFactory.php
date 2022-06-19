@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories\Item;
+namespace Database\Factories\Common;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

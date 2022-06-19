@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Web\Item;
+namespace App\Http\Controllers\Web\Publishing;
 
+use App\Models\Publishing\Notification;
+use App\Http\Requests\Publishing\StoreNotificationRequest;
+use App\Http\Requests\Publishing\UpdateNotificationRequest;
 use App\Http\Controllers\Controller;
-use App\Models\Item\Category;
-use App\Http\Requests\Item\StoreCategoryRequest;
-use App\Http\Requests\Item\UpdateCategoryRequest;
 
-class CategoryController extends Controller
+class NotificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCategoryRequest  $request
+     * @param  \App\Http\Requests\StoreNotificationRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreNotificationRequest $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Item\Category  $Category
+     * @param  \App\Models\Publishing\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $Category)
+    public function show(Notification $notification)
     {
         //
     }
@@ -54,10 +54,10 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Item\Category  $Category
+     * @param  \App\Models\Publishing\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $Category)
+    public function edit(Notification $notification)
     {
         //
     }
@@ -65,11 +65,11 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCategoryRequest  $request
-     * @param  \App\Models\Item\Category  $Category
+     * @param  \App\Http\Requests\UpdateNotificationRequest  $request
+     * @param  \App\Models\Publishing\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoryRequest $request, Category $Category)
+    public function update(UpdateNotificationRequest $request, Notification $notification)
     {
         //
     }
@@ -77,10 +77,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Item\Category  $Category
+     * @param  \App\Models\Publishing\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $Category)
+    public function destroy(Notification $notification)
     {
         //
     }

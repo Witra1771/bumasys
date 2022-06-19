@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Seeders\Item;
+namespace Database\Seeders\Publishing;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CategorySeeder extends Seeder
+class NotificationSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -37,8 +37,8 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('item_brand_id')->references('id')->on('item_brands');
-            $table->foreign('item_category_id')->references('id')->on('item_categories');
-            $table->foreign('item_sub_category_id')->references('id')->on('item_categories');
+            $table->foreign('item_category_id')->references('id')->on('categories');
+            $table->foreign('item_sub_category_id')->references('id')->on('categories');
             $table->foreign('item_warranty_id')->references('id')->on('item_warranties');
             $table->foreign('company_id')->references('id')->on('companies');
         });
