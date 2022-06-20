@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Policies\Order\Purchase;
+namespace App\Policies\Purchase;
 
 use App\Models\Order\Purchase\Bill;
 use App\Models\User;

@@ -2,20 +2,19 @@
 
 namespace App\Models\Item;
 
-use App\Models\Common\Category;
-use App\Models\Company\Company;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\Item\ItemScopeService;
 use Cviebrock\EloquentSluggable\Sluggable;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class Item extends Model implements Auditable
 {
-    use HasFactory, SoftDeletes, Sluggable, \OwenIt\Auditing\Auditable;
+    use HasFactory, SoftDeletes, ItemScopeService, Sluggable, \OwenIt\Auditing\Auditable;
 
-    public $table = 'items';
+    public $table = 'products';
 
     /**
      * Return the sluggable configuration array for this model.
@@ -33,24 +32,27 @@ class Item extends Model implements Auditable
 
     public $fillable = [
         'company_id',
-        'item_brand_id',
-        'item_category_id',
-        'item_sub_category_id',
-        'item_warranty_id',
-        'meta_tags',
-        'slug',
+        'is_package',
+        'list_product_id',
         'name',
-        'variant_combination',
-        'description',
-        'short_description',
+        'sku',
+        'product_units_id',
+        'product_brands_id',
+        'product_categories_id',
+        'product_sub_categories_id',
+        'product_warranties_id',
         'weight',
-        'is_active',
+        'is_sale',
         'is_managed_stock',
+        'alert_quantity',
+        'description',
         'image_path',
         'brochure_path',
-        'item_type',
-        'tags',
-        'parent'
+        'product_type',
+        'variants',
+        'created_by',
+        'updated_by',
+        'deleted_by'
     ];
 
     /**
@@ -60,68 +62,51 @@ class Item extends Model implements Auditable
      */
     protected $casts = [
         'company_id' => 'integer',
-        'item_brand_id' => 'integer',
-        'item_category_id' => 'integer',
-        'item_sub_category_id' => 'integer',
-        'item_warranty_id' => 'integer',
-        'meta_tags' => 'json',
-        'slug' => 'string',
+        'is_package' => 'boolean',
+        'list_product_id' => 'array',
         'name' => 'string',
-        'variant_combination' => 'json',
-        'description' => 'text',
-        'short_description' => 'string',
-        'weight' => 'decimal',
-        'is_active' => 'boolean',
+        'sku' => 'string',
+        'product_units_id' => 'integer',
+        'product_brands_id' => 'integer',
+        'product_categories_id' => 'integer',
+        'product_sub_categories_id' => 'integer',
+        'product_warranties_id' => 'integer',
+        'weight' => 'double',
+        'is_sale' => 'boolean',
         'is_managed_stock' => 'boolean',
-        'image_path' => 'text',
-        'brochure_path' => 'text',
-        'item_type' => 'string',
-        'tags' => 'json',
-        'parent' => 'integer'
+        'alert_quantity' => 'integer',
+        'description' => 'string',
+        'image_path' => 'string',
+        'brochure_path' => 'string',
+        'product_type' => 'string',
+        'variants' => 'array',
+        'created_by' => 'string',
+        'updated_by' => 'string',
+        'deleted_by' => 'string'
     ];
 
-    /**
-     * The attributes that should be cast.
-     * @return BelongsTo
-     */
-    public function company(): BelongsTo
+    public function unit(): HasOne
     {
-        return $this->belongsTo(Company::class, 'company_id', 'id');
+        return $this->hasOne(Unit::class, 'product_units_id', 'id');
     }
 
-    /**
-     * The attributes that should be cast.
-     * @return BelongsTo
-     */
-    public function brand(): BelongsTo
+    public function brand(): HasOne
     {
-        return $this->belongsTo(Brand::class, 'item_brand_id', 'id');
+        return $this->hasOne(Brand::class, 'product_brands_id', 'id');
     }
 
-    /**
-     * The attributes that should be cast.
-     * @return BelongsTo
-     */
-    public function category(): BelongsTo
+    public function category(): HasOne
     {
-        return $this->belongsTo(Category::class, 'item_category_id', 'id');
+        return $this->hasOne(Category::class, 'product_categories_id', 'id');
     }
 
-    /**
-     * The attributes that should be cast.
-     * @return BelongsTo
-     */
-    public function subCategory(): BelongsTo
+    public function subCategory(): HasOne
     {
-        return $this->belongsTo(Category::class, 'item_sub_category_id', 'id');
+        return $this->hasOne(Category::class, 'product_sub_categories_id', 'id');
     }
 
-    /**
-     * The attributes that should be cast.
-     * @return BelongsTo
-     */
-    public function warranty(): BelongsTo
+    public function warranty(): HasOne
     {
-        return $this->belongsTo(Warranty::class, 'item_warranty_id', 'id');
+        return $this->hasOne(Warranty::class, 'product_warranties_id', 'id');
     }
 }

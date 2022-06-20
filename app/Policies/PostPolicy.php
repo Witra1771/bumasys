@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Policies\Publishing;
+namespace App\Policies;
 
-use App\Models\Publishing\Notification;
+use App\Models\Publishing\Post;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class NotificationPolicy
+class PostPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class NotificationPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Publishing\Notification  $notification
+     * @param  \App\Models\Publishing\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Notification $notification)
+    public function view(User $user, Post $post)
     {
         //
     }
@@ -48,10 +48,10 @@ class NotificationPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Publishing\Notification  $notification
+     * @param  \App\Models\Publishing\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Notification $notification)
+    public function update(User $user, Post $post)
     {
         //
     }
@@ -60,10 +60,10 @@ class NotificationPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Publishing\Notification  $notification
+     * @param  \App\Models\Publishing\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Notification $notification)
+    public function delete(User $user, Post $post)
     {
         //
     }
@@ -72,10 +72,10 @@ class NotificationPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Publishing\Notification  $notification
+     * @param  \App\Models\Publishing\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Notification $notification)
+    public function restore(User $user, Post $post)
     {
         //
     }
@@ -84,10 +84,10 @@ class NotificationPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Publishing\Notification  $notification
+     * @param  \App\Models\Publishing\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Notification $notification)
+    public function forceDelete(User $user, Post $post)
     {
         //
     }

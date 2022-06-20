@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders\Order\Purchase;
+namespace Database\Seeders\Purchase;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
