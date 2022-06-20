@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Payment;
+namespace App\Http\Controllers\Web\Payment;
 
 use App\Models\Payment\PaymentMethod;
 use App\Http\Requests\Payment\StorePaymentMethodRequest;

@@ -13,15 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('notifications', function (Blueprint $table) {
+        Schema::create('user_notifications', function (Blueprint $table) {
             $table->id();
             $table->boolean('is_system')->default(false);
             $table->bigInteger('company_id')->nullable();
             $table->bigInteger('category_id')->unsigned();
-            $table->json('meta_tags');
-            $table->string('title');
+            $table->string('name');
             $table->text('description');
-            $table->enum('status', ['draft', 'published']);
+            $table->boolean('is_active')->default(true);
+            $table->timestamp('start_date');
+            $table->timestamp('end_date');
             $table->bigInteger('created_by')->unsigned();
             $table->timestamps();
             $table->softDeletes();
@@ -37,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notifications');
+        Schema::dropIfExists('user_notifications');
     }
 };
