@@ -15,11 +15,13 @@ return new class extends Migration
     {
         Schema::create('item_package_details', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('company_id')->unsigned();
             $table->bigInteger('items_id_package')->unsigned();
             $table->json('items_id');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('items_id_package')->references('id')->on('items');
+            $table->foreign('company_id')->references('id')->on('companies');
         });
     }
 
