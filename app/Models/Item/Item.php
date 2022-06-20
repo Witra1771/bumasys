@@ -4,9 +4,11 @@ namespace App\Models\Item;
 
 use App\Models\Common\Category;
 use App\Models\Company\Company;
+use App\Models\Item\PackageDetails;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\Sluggable;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -15,6 +17,11 @@ class Item extends Model implements Auditable
 {
     use HasFactory, SoftDeletes, Sluggable, \OwenIt\Auditing\Auditable;
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     public $table = 'items';
 
     /**
@@ -30,7 +37,12 @@ class Item extends Model implements Auditable
             ]
         ];
     }
-
+    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public $fillable = [
         'company_id',
         'item_brand_id',
@@ -81,7 +93,7 @@ class Item extends Model implements Auditable
     ];
 
     /**
-     * The attributes that should be cast.
+     *  Get the company that owns the item.
      * @return BelongsTo
      */
     public function company(): BelongsTo
@@ -90,7 +102,7 @@ class Item extends Model implements Auditable
     }
 
     /**
-     * The attributes that should be cast.
+     *  Get the brand that owns the item
      * @return BelongsTo
      */
     public function brand(): BelongsTo
@@ -99,7 +111,7 @@ class Item extends Model implements Auditable
     }
 
     /**
-     * The attributes that should be cast.
+     * Get the category that owns the item
      * @return BelongsTo
      */
     public function category(): BelongsTo
@@ -108,7 +120,7 @@ class Item extends Model implements Auditable
     }
 
     /**
-     * The attributes that should be cast.
+     * Get the sub category that owns the item
      * @return BelongsTo
      */
     public function subCategory(): BelongsTo
@@ -117,11 +129,19 @@ class Item extends Model implements Auditable
     }
 
     /**
-     * The attributes that should be cast.
+     * Get the warranty that owns the item
      * @return BelongsTo
      */
     public function warranty(): BelongsTo
     {
         return $this->belongsTo(Warranty::class, 'item_warranty_id', 'id');
+    }
+    
+    /**
+     * Get the item package for the item.
+     */
+    public function itemPackage(): HasOne
+    {
+        return $this->hasOne(PackageDetails::class, 'item_warranty_id', 'id');
     }
 }
