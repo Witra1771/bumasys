@@ -18,16 +18,16 @@ return new class extends Migration
             $table->boolean('is_system')->default(false);
             $table->bigInteger('company_id')->nullable();
             $table->bigInteger('category_id')->unsigned();
-            $table->string('name');
+            $table->json('meta_tags');
+            $table->string('title');
             $table->text('description');
-            $table->boolean('is_active')->default(true);
-            $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->enum('status', ['draft', 'published']);
             $table->bigInteger('created_by')->unsigned();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('created_by')->references('id')->on('users');
+
         });
     }
 

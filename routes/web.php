@@ -21,9 +21,6 @@ use UniSharp\LaravelFilemanager\Lfm;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
@@ -40,6 +37,10 @@ Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
+
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::resource('roles',  RoleController::class);
 Route::resource('permissions',  PermissionController::class);

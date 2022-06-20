@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('group_id')->unsigned();
             $table->bigInteger('company_id')->unsigned();
             $table->boolean('is_can_login')->default(false);
@@ -35,6 +36,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->foreign('group_id')->references('id')->on('contact_groups');
             $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
