@@ -7,8 +7,12 @@
 Note: protected. email me [msyalva.freelance@gmail.com](mailme:msyalva.freelance@gmail.com)
 
 # Feature
+- [x] Dynamic Role and Permissions
 - [ ] Multi Company / Merchant
-- [ ] Role & Permission per Company
+- [ ] CRM
+- [ ] Sales and Distribution Management
+- [ ] Invoicing Management
+- [ ] Inventory Management
+- [ ] Bill Management
 - [ ] Auditable Module
 - [ ] Firewall
-- [ ] and Many more
