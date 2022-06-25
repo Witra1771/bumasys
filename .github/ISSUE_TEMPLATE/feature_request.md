@@ -7,14 +7,51 @@ assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+name: Permintaan Fitur Baru
+description: Mengusulkan fitur baru
+title: "Permintaan fitur: "
+labels: ['Fitur']
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+body:
+  - type: textarea
+    id: kekurangan
+    attributes:
+      label: Apa kekurangan yg ingin diatasi?
+      description: Beri keterangan singkat dan jelas mengapa fitur ini diperlukan.
+    validations:
+      required: true
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+  - type: textarea
+    id: solusi
+    attributes:
+      label: Jelaskan solusi yg diinginkan
+      description: |
+        Beri keterangan singkat dan jelas mengenai fitur yg diinginkan.
+        Beri acuan peraturan yg mendasari fitur ini, kalau ada.
+        Lampirkan contoh laporan dan tangkapan layar yang diinginkan.
+    validations:
+      required: true
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+  - type: textarea
+    id: alternatif
+    attributes:
+      label: Apakah ada alternatif lain
+      description: Beri keterangan singkat dan jelas solusi lain yg telah anda pertimbangkan untuk kebutuhan ini.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Untuk versi OpenSID mana
+      description: Fitur ini diusulkan untuk versi Rilis Umum (mis. v21.03) atau Rilis Premium (mis v21.03-premium) yg mana?
+    validations:
+      required: true
+
+  - type: textarea
+    id: tambahan
+    attributes:
+      label: Informasi tambahan
+      description: Beri informasi lainnya yg dapat membantu menjelaskan permintaan ini.
+    validations:
+      required: false
