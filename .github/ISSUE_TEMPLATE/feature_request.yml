@@ -31,14 +31,6 @@ body:
     validations:
       required: true
 
-  - type: input
-    id: version
-    attributes:
-      label: Untuk versi OpenSID mana
-      description: Fitur ini diusulkan untuk versi Rilis Umum (mis. v21.03) atau Rilis Premium (mis v21.03-premium) yg mana?
-    validations:
-      required: true
-
   - type: textarea
     id: tambahan
     attributes:
